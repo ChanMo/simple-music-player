@@ -10,12 +10,30 @@ import type {Node} from 'react';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import TrackPlayer, { Capability } from 'react-native-track-player'
+
 import HomeScreen from './HomeScreen'
 import DiscoverScreen from './DiscoverScreen'
 
 const Tab = createBottomTabNavigator()
 
 const App: () => Node = () => {
+
+  useEffect(() => {
+    const initTracks = async () => {
+      await TrackPlayer.setupPlayer()
+      TrackPlayer.updateOptions({
+        capabilities: [
+          Capability.Play,
+          Capability.Pause,
+          Capability.SkipToNext,
+          Capability.SkipToPrevious,
+          Capability.Stop,
+        ]
+      })
+    }
+    initTracks()
+  }, [])
 
   const screenOptions = ({route}) => ({
     tabBarIcon: ({focused, color, size}) => {

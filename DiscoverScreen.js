@@ -30,7 +30,6 @@ const DiscoverScreen = () => {
       const res = await fetchTracks()
       setTracks(res)
 
-      await TrackPlayer.setupPlayer()
       await TrackPlayer.add(res)
     }
     getTracks()

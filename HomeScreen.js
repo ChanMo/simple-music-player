@@ -31,7 +31,6 @@ const HomeScreen = ({navigation}) => {
     const initTracks = async () => {
       const res = await fetchTracks()
       setTracks(res)
-      await TrackPlayer.setupPlayer()
       await TrackPlayer.add(res)
       await TrackPlayer.play()
     }
